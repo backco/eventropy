@@ -54,6 +54,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/logtrie.jar"/>
+	<classpathentry kind="lib" path="lib/logtrie-201821002.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
