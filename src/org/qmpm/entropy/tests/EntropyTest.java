@@ -51,11 +51,11 @@ class EntropyTest {
 	static List<Trie> triesFlat = new ArrayList<>();
 	static int sigDigs = 4;
 	
-	static String[] names = {
-			"log1.xes", 
-			"log2.xes", 
-			"log3.xes", 
-			"log4.xes"};
+	static String[] files = {
+			"logs//running_examples//log1.xes", 
+			"logs//running_examples//log2.xes", 
+			"logs//running_examples//log3.xes", 
+			"logs//running_examples//log4.xes"};
 
 	static double[] traceEntropyVals 	= {3.0000, 2.5477, 3.0000, 3.3219, 7.7518};
 	static double[] prefixEntropyValsFlat 	= {4.0931, 4.0931, 5.6288, 4.8219, 12.5381};
@@ -108,11 +108,6 @@ class EntropyTest {
 	@BeforeAll
 	public static void init() {
 		
-		String[] files = new String[names.length];
-		
-		for (int i=0; i<names.length; i++) {
-			files[i] = "logs\\" + names[i];
-		}
 		try {
 			//System.out.println("adding files: " + Arrays.toString(files));
 			trieMediator.addFiles(Arrays.asList(files));
@@ -139,7 +134,7 @@ class EntropyTest {
 	@Test
 	public void traceEntropy() {
 		
-		for (int i=0; i<Math.min(names.length, traceEntropyVals.length); i++) {
+		for (int i=0; i<Math.min(files.length, traceEntropyVals.length); i++) {
 			TraceEntropy e = new TraceEntropy(); 
 			e.compute(tries.get(i));
 			assertEquals(traceEntropyVals[i], MathTools.round(e.getValue(), sigDigs));
@@ -148,7 +143,7 @@ class EntropyTest {
 	
 	@Test
 	public void prefixEntropyFlat() {
-		for (int i=0; i<Math.min(names.length, prefixEntropyValsFlat.length); i++) {
+		for (int i=0; i<Math.min(files.length, prefixEntropyValsFlat.length); i++) {
 			PrefixEntropy e = new PrefixEntropy(); 
 			e.compute(triesFlat.get(i));
 			assertEquals(prefixEntropyValsFlat[i], MathTools.round(e.getValue(), sigDigs));
@@ -157,7 +152,7 @@ class EntropyTest {
 
 	@Test
 	public void globalBlockEntropyFlat() {
-		for (int i=0; i<Math.min(names.length, blockEntropyValsFlat.length); i++) {
+		for (int i=0; i<Math.min(files.length, blockEntropyValsFlat.length); i++) {
 			GlobalBlockEntropy e = new GlobalBlockEntropy(); 
 			e.compute(triesFlat.get(i));
 			assertEquals(blockEntropyValsFlat[i], MathTools.round(e.getValue(), sigDigs));
@@ -182,7 +177,7 @@ class EntropyTest {
 	
 	@Test
 	public void kNearestLevenshteinFlat() {
-		for (int i=0; i<Math.min(names.length, kNNVals.size()); i++) {
+		for (int i=0; i<Math.min(files.length, kNNVals.size()); i++) {
 			
 			Trie t = triesFlat.get(i);
 			List<ArrayList<Double>> distances = EditDistance.kNearestLevenshtein(11, true, t);
@@ -202,7 +197,7 @@ class EntropyTest {
 	
 	@Test
 	public void klEntropyFlat() {
-		for (int i=0; i<Math.min(names.length, klEntropyValsFlat.length); i++) {
+		for (int i=0; i<Math.min(files.length, klEntropyValsFlat.length); i++) {
 			//System.out.println(i + " of " + klEntropyValsFlat.length);
 			KLEntropy e = new KLEntropy();
 			e.setDimensions(1);
@@ -213,7 +208,7 @@ class EntropyTest {
 		
 	@Test
 	public void kNNEntropyFlat() {
-		for (int i=0; i<Math.min(names.length, kNNEntropyValsFlat.length); i++) {
+		for (int i=0; i<Math.min(files.length, kNNEntropyValsFlat.length); i++) {
 			KNNEntropy e = new KNNEntropy();
 			e.setK(3);
 			e.compute(triesFlat.get(i));
