@@ -14,7 +14,7 @@ For a help text describing all options, use: `java -jar eventropy.jar -h` (see a
 
 If the path to a directory is entered, eventropy will search for all relevant files in that directory and its subdirectories. Multiple paths to files or directories are allowed.
 
-OPTIONS are one or more of the following entropy measures or other options. Options taking one or more parameters should have a space between the option and each parameter (e.g. `-knn 2 1`):
+OPTIONS are one or more of the following entropy measures or other options. Options taking one or more parameters should have a space between the option and each parameter (e.g. `--knn 2 1`):
 
 * `-h,--help` Print help message
 * `-t,--time` Print time elapsed for computing metric
@@ -27,7 +27,7 @@ OPTIONS are one or more of the following entropy measures or other options. Opti
 * `-B,--k-block-global` Global _k_-block entropy
 * `-b,--k-block <SIZE>` _k_-block entropy
 * `-K,--kl <DIMENSION>` Kozachenko-Leonenko (nearest neighbor) entropy
-* `-k,--knn <K, DIMENSION>` Entropy based on the _k_ th nearest neighbor`
+* `-k,--knn <K, DIMENSION>` Entropy based on the _k_ th nearest neighbor
 * `-z,--lempel-ziv` Lempel-Ziv entropy rate
 * `-d,--block-diff <CONST>` _k_-block entropy rate using difference-based estimate and cutoff constraint from 1-5
 * `-r,--block-ratio <CONST>` _k_-block entropy rate using ratio-based estimate and cutoff constraint from 1-5
