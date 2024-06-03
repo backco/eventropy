@@ -31,12 +31,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.qmpm.entropy.metrics.EditDistance;
-import org.qmpm.entropy.metrics.GlobalBlockEntropy;
-import org.qmpm.entropy.metrics.KLEntropy;
-import org.qmpm.entropy.metrics.KNNEntropy;
-import org.qmpm.entropy.metrics.PrefixEntropy;
-import org.qmpm.entropy.metrics.TraceEntropy;
+import org.qmpm.entropy.metrics.*;
 import org.qmpm.logtrie.trie.AbstractTrieMediator;
 import org.qmpm.entropy.trie.EntropyTrieMediator;
 import org.qmpm.logtrie.trie.Trie;
@@ -62,6 +57,7 @@ class EntropyTest {
 	static double[] blockEntropyValsFlat 	= {5.7537, 5.7537, 7.0427, 4.7507, 16.2823};
 	static double[] klEntropyValsFlat 		= {1.1702, 1.1702, 2.7775, 2.0813};
 	static double[] kNNEntropyValsFlat		= {-0.091, -0.091, 1.5614, 0.6867};
+	static double[] lempelZivEntropyVal 	= {0.6097, 0.5807, 0.8129, 0.6115};
 	//static double[] medianBranchLenVals = {7.0, 7.0, 6.5, 4.0};
 	
 	static List<List<List<Double>>> kNNVals = Arrays.asList(
@@ -213,6 +209,16 @@ class EntropyTest {
 			e.setK(3);
 			e.compute(triesFlat.get(i));
 			assertEquals(kNNEntropyValsFlat[i], MathTools.round(e.getValue(), sigDigs));
+		}
+	}
+
+	@Test
+	public void lempelZivEntropy() {
+
+		for (int i=0; i<Math.min(files.length, lempelZivEntropyVal.length); i++) {
+			LempelZivEntropyRate e = new LempelZivEntropyRate();
+			e.compute(tries.get(i));
+			assertEquals(lempelZivEntropyVal[i], MathTools.round(e.getValue(), sigDigs));
 		}
 	}
 }

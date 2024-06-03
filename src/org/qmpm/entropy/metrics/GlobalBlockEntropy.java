@@ -133,10 +133,15 @@ public class GlobalBlockEntropy extends Metric {
 			if (getOutcome() != Outcome.CONTINUE) {
 				return getOutcome();
 			}
-			
-			
+
+
 		}
-		
+
+		// Reset visit flags on all nodes
+		for (Node node : t.getNodeSet(true)) {
+			node.setAttribute(VISITED, false);
+		}
+
 		progress = total / 2;
 		total = total / 2 + totalBlockCount; //nGramTrie.getSize();
 		

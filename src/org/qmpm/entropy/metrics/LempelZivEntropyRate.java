@@ -23,6 +23,7 @@
 
 package org.qmpm.entropy.metrics;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -63,14 +64,16 @@ public class LempelZivEntropyRate extends Metric {
 			}
 			
 			Collections.reverse(traceAsArray);
-			String word = "";
-			
+			StringBuilder word = new StringBuilder();
 			for (String activity : traceAsArray) {
-				word += activity;
-				if (!words.contains(word)) {
-					words.add(word);
-					word = "";
+				word.append(activity);
+				String wordStr = word.toString();
+				if (!words.contains(wordStr)) {
+					words.add(wordStr);
+					word.setLength(0);
+					continue;
 				}
+				word.append("/");
 			}
 			
 			N += traceAsArray.size() * node.getEndVisits();

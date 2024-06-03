@@ -61,7 +61,8 @@ public class KNNEntropy extends Metric {
 		
 		double H = 0.0;
 		int n = distancesSet.size();
-		
+
+		double V = Math.pow(Math.PI, p / 2.0) / Gamma.gamma((p / 2.0) + 1);
 		for (ArrayList<Double> distances : distancesSet) {
 			double d;
 			if (!distances.isEmpty()) {
@@ -69,7 +70,6 @@ public class KNNEntropy extends Metric {
 			} else {
 				return Outcome.ERROR;
 			}
-			double V = Math.pow(Math.PI, p / 2.0) / Gamma.gamma((p / 2.0) + 1);
 			H += Math.log(d) + Math.log(V) + Gamma.GAMMA - L(k - 1) + Math.log(n);
 		}
 		

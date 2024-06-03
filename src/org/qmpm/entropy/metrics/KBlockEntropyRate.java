@@ -125,6 +125,7 @@ abstract public class KBlockEntropyRate extends Metric {
 				}
 				
 				H_k = kbe.getValue();
+				kBlockMap.put(k, H_k);
 			}
 			
 			double h_k = getRate(H_k, H_kMinus1, k);
